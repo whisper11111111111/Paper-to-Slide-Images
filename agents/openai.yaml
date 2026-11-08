@@ -1,0 +1,4 @@
+interface:
+  display_name: "文献到图片式PPT"
+  short_description: "检索核验文献，提炼大纲，按参考风格生成逐页图片并制作PPT与资料包"
+  default_prompt: "使用 $paper-to-slide-images，按文献检索、总结分析、大纲、逐页图片生成、PPT打包的流程完成报告。"
