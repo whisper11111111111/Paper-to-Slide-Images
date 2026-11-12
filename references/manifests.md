@@ -21,9 +21,9 @@ python scripts/extract_pdf_assets.py --spec task/pdf-assets.json --out task/figu
 
 ```json
 {
- "title":"报告主题","slide_size":{"width":1600,"height":900},
+ "title":"报告主题","slide_size":{"width":1600,"height":900},"include_notes":false,
  "slides":[{
-  "id":"01","title":"封面","image":"slides/01.png","notes":"讲解提示",
+  "id":"01","title":"封面","image":"slides/01.png","notes":"",
   "citations":[{"id":"S01","title":"原始题名","doi":"实际核验的DOI","locator":"Figure 2"}],
   "editable_text":[{"text":"姓名：________","font_family":"环境中已确认可用的字体","font_size":28,
     "position":{"left":70,"top":730,"width":650,"height":60}}],
@@ -35,6 +35,10 @@ python scripts/extract_pdf_assets.py --spec task/pdf-assets.json --out task/figu
 `figures`可填写`{"image":"figures/device.png","alt":"S01 Figure 2","position":{"left":800,"top":250,"width":600,"height":350}}`，将原始截图等比例放进预留位置。
 
 `editable_text`按需填写。`font_family`来自环境核验，不照抄上述说明文本。位置和字号用96 DPI CSS像素。
+
+默认不写演讲稿或来源备注。只有用户要求时，将顶层 `include_notes` 显式设为
+`true`，此时才写入每页 `notes` 与 `citations` 对应的备注内容。内部 `id` 与
+图片文件名用于管理顺序，不代表允许在页面生成页码或展示性标号。
 
 构建器需要Codex的`@oai/artifact-tool`及本地演示文稿技能。先读当前演示文稿技能并发现真实依赖路径：
 

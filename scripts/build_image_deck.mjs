@@ -88,7 +88,9 @@ async function main() {
       box.text.style = {typeface:text.font_family,fontSize:text.font_size,color:text.color || '#153957'};
     }
     const citations = (item.citations || []).map(c => [c.id,c.title,c.doi ? 'https://doi.org/' + c.doi : c.url,c.locator].filter(Boolean).join(' | '));
-    slide.speakerNotes.text = [item.notes || '',citations.length ? '\nSources:\n' + citations.join('\n') : ''].join('\n');
+    if (spec.include_notes === true) {
+      slide.speakerNotes.text = [item.notes || '',citations.length ? '\nSources:\n' + citations.join('\n') : ''].join('\n');
+    }
     const preview = await presentation.export({slide,format:'png',scale:1});
     await fs.writeFile(path.join(buildDir,`slide-${String(i+1).padStart(2,'0')}.png`),new Uint8Array(await preview.arrayBuffer()));
   }
